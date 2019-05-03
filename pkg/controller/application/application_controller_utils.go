@@ -57,8 +57,8 @@ func (c *Controller) createReleaseForApplication(app *shipper.Application, relea
 	}
 	newRelease.Spec.Environment.Chart.Version = cv.Version
 
-	glog.V(4).Infof("Release %q labels: %v", controller.MetaKey(app), newRelease.Labels)
-	glog.V(4).Infof("Release %q annotations: %v", controller.MetaKey(app), newRelease.Annotations)
+	glog.V(4).Infof("Release %q labels: %v", controller.MetaKey(newRelease), newRelease.Labels)
+	glog.V(4).Infof("Release %q annotations: %v", controller.MetaKey(newRelease), newRelease.Annotations)
 
 	rel, err := c.shipperClientset.ShipperV1alpha1().Releases(app.Namespace).Create(newRelease)
 	if err != nil {
