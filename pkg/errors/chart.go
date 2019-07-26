@@ -189,23 +189,23 @@ func NewChartDataCorruptionError(cv *repo.ChartVersion, err error) ChartDataCorr
 	}
 }
 
-type UnrecoverableChartRepoIndexError struct {
+type NoCachedChartRepoIndexError struct {
 	err error
 }
 
-func (e UnrecoverableChartRepoIndexError) Error() string {
+func (e NoCachedChartRepoIndexError) Error() string {
 	return fmt.Sprintf(
-		"failed to get chart repo index: %s",
+		"failed to get chart repo index and there is no index in cache: %s",
 		e.err,
 	)
 }
 
-func (e UnrecoverableChartRepoIndexError) ShouldRetry() bool {
-	return false
+func (e NoCachedChartRepoIndexError) ShouldRetry() bool {
+	return true
 }
 
-func NewUnrecoverableChartRepoIndexError(err error) UnrecoverableChartRepoIndexError {
-	return UnrecoverableChartRepoIndexError{err: err}
+func NewNoCachedChartRepoIndexError(err error) NoCachedChartRepoIndexError {
+	return NoCachedChartRepoIndexError{err: err}
 }
 
 type ChartRepoIndexError struct {
