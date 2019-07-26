@@ -3,7 +3,7 @@
 set -e
 
 # Apply cluster configurations for shipper
-go run cmd/shipperctl/main.go admin clusters apply -f ci/clusters.yaml
+./build/shipperctl admin clusters apply -f ci/clusters.yaml
 
 # Wait for microk8s.registry to be ready, as we're about to use it
 REGISTRY_POD=$(kubectl get pod -n container-registry -l app=registry \
@@ -27,7 +27,7 @@ kubectl -n shipper-system logs -f $SHIPPER_POD &
 
 TESTCHARTS=http://$(kubectl get pod -l app=helm -o jsonpath='{.items[0].status.podIP}'):8879
 
-go test ./test/e2e --test.v --e2e --kubeconfig ~/.kube/config \
+./build/e2e.test --test.v --e2e --kubeconfig ~/.kube/config \
 	--testcharts $TESTCHARTS --progresstimeout=2m --appcluster microk8s
 
 TEST_STATUS=$?
