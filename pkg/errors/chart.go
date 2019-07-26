@@ -22,29 +22,6 @@ func newChartError(chartspec *shipper.Chart) ChartError {
 	}
 }
 
-type UnrecoverableChartFetchFailureError struct {
-	ChartError
-	err error
-}
-
-func (e UnrecoverableChartFetchFailureError) Error() string {
-	return fmt.Sprintf(
-		"failed to fetch chart [name: %q, version: %q, repo: %q]: %s",
-		e.chartName, e.chartVersion, e.chartRepo,
-		e.err)
-}
-
-func (e UnrecoverableChartFetchFailureError) ShouldRetry() bool {
-	return false
-}
-
-func NewUnrecoverableChartFetchFailureError(chartspec *shipper.Chart, err error) UnrecoverableChartFetchFailureError {
-	return UnrecoverableChartFetchFailureError{
-		ChartError: newChartError(chartspec),
-		err:        err,
-	}
-}
-
 type ChartFetchFailureError struct {
 	ChartError
 	err error
@@ -210,6 +187,25 @@ func NewChartDataCorruptionError(cv *repo.ChartVersion, err error) ChartDataCorr
 		},
 		err: err,
 	}
+}
+
+type UnrecoverableChartRepoIndexError struct {
+	err error
+}
+
+func (e UnrecoverableChartRepoIndexError) Error() string {
+	return fmt.Sprintf(
+		"failed to get chart repo index: %s",
+		e.err,
+	)
+}
+
+func (e UnrecoverableChartRepoIndexError) ShouldRetry() bool {
+	return false
+}
+
+func NewUnrecoverableChartRepoIndexError(err error) UnrecoverableChartRepoIndexError {
+	return UnrecoverableChartRepoIndexError{err: err}
 }
 
 type ChartRepoIndexError struct {

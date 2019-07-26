@@ -61,6 +61,13 @@ func (r *Repo) RefreshIndex() (*repo.IndexFile, error) {
 
 	data, err := r.fetcher(indexURL)
 	if err != nil {
+		_, cacheErr := r.cache.Fetch("index.yaml")
+		if cacheErr != nil {
+			return nil, shippererrors.NewUnrecoverableChartRepoIndexError(
+				fmt.Errorf("failed to fetch %q: %v", indexURL, err),
+			)
+		}
+
 		return nil, shippererrors.NewChartRepoIndexError(
 			fmt.Errorf("failed to fetch %q: %v", indexURL, err),
 		)
