@@ -16,7 +16,7 @@ import (
 	// index structures. This version is patched to understand json
 	// annotations and works fine.
 	"github.com/Masterminds/semver"
-	yaml "github.com/ghodss/yaml"
+	yaml "sigs.k8s.io/yaml"
 
 	"k8s.io/helm/pkg/chartutil"
 	"k8s.io/helm/pkg/proto/hapi/chart"
