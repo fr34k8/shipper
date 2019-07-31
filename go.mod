@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go v0.39.0 // indirect
 	github.com/Azure/go-autorest v12.1.0+incompatible // indirect
 	github.com/Azure/go-autorest/autorest v0.2.0 // indirect
-	github.com/Masterminds/semver v1.4.0 // indirect
+	github.com/Masterminds/semver v1.4.0
 	github.com/Masterminds/sprig v2.14.1+incompatible // indirect
 	github.com/NYTimes/gziphandler v1.1.1 // indirect
 	github.com/OneOfOne/xxhash v1.2.5 // indirect
@@ -38,6 +38,7 @@ require (
 	github.com/kisielk/errcheck v1.2.0 // indirect
 	github.com/kr/pty v1.1.4 // indirect
 	github.com/mailru/easyjson v0.0.0-20190403194419-1ea4449da983 // indirect
+	github.com/masterminds/semver v1.4.2
 	github.com/mitchellh/go-homedir v1.0.0
 	github.com/munnerz/goautoneg v0.0.0-20190414153302-2ae31c8b6b30 // indirect
 	github.com/onsi/ginkgo v1.8.0 // indirect
